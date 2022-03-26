@@ -30,7 +30,7 @@ const DayDateBtn = ({ selectedDate, onChange }: DayDateBtnProps) => {
   };
   return (
     <div>
-      <LocaleArrow type="prev" onClick={handlePrev} />
+      <LocaleArrow type="prev" onClick={handlePrev}/>
       <DateProvider>
         <DatePicker
           open={open}
@@ -50,7 +50,7 @@ const DayDateBtn = ({ selectedDate, onChange }: DayDateBtnProps) => {
           )}
         />
       </DateProvider>
-      <LocaleArrow type="next" onClick={handleNext} />
+      <LocaleArrow type="next" onClick={handleNext}/>
     </div>
   );
 };

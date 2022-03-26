@@ -13,6 +13,7 @@ import { DayDateBtn } from "./DayDateBtn";
 import { MonthDateBtn } from "./MonthDateBtn";
 import { useAppState } from "../../hooks/useAppState";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { addDays } from "date-fns";
 
 export type View = "month" | "week" | "day";
 
@@ -50,6 +51,14 @@ const Navigation = () => {
     }
   };
 
+  const getClosestWeekday = (d: Date) => {
+    if (d.getDay() === 0)
+      return addDays(d, 1);
+    if (d.getDay() === 6)
+      return addDays(d, -1);
+    return d;
+  };
+
   return (
     <div
       style={{
@@ -60,8 +69,8 @@ const Navigation = () => {
     >
       {renderDateSelector()}
       <div>
-        <Button onClick={() => handleState(new Date(), "selectedDate")}>
-          Today
+        <Button onClick={() => handleState(getClosestWeekday(new Date()), "selectedDate")}>
+          Hoy
         </Button>
         {views.length > 1 &&
           (isDesktop ? (

@@ -202,7 +202,7 @@ const Week = () => {
             }`}
             style={{ height: headerHeight }}
           >
-            <TodayTypo date={date} onClick={handleGotoDay} />
+            <TodayTypo date={date} />
             {renderMultiDayEvents(recousedEvents, date)}
           </span>
         ))}

@@ -63,19 +63,19 @@ const initialState = (
       value: event?.title || "",
       validity: !!event?.title,
       type: "input",
-      config: { label: "Title", required: true, min: 3 },
+      config: { label: "Paciente", required: true, min: 3 },
     },
     start: {
       value: event?.start || new Date(),
       validity: true,
       type: "date",
-      config: { label: "Start", sm: 6 },
+      config: { label: "Inicio", sm: 6 },
     },
     end: {
       value: event?.end || new Date(),
       validity: true,
       type: "date",
-      config: { label: "End", sm: 6 },
+      config: { label: "Fin", sm: 6 },
     },
     ...customFields,
   };
@@ -221,10 +221,10 @@ const Editor = () => {
         </DialogContent>
         <DialogActions>
           <Button color="inherit" fullWidth onClick={() => handleClose()}>
-            Cancel
+            Cancelar
           </Button>
           <Button color="primary" fullWidth onClick={handleConfirm}>
-            Confirm
+            Confirmar
           </Button>
         </DialogActions>
       </Fragment>

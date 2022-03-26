@@ -10,20 +10,19 @@ const App = () => {
     <Scheduler
       dialogMaxWidth="sm"
       // loading={loading}
-      // view="month"
+      day={null}
+      month={null}
+      view="week"
       events={events}
-      selectedDate={new Date("2021 5 1")}
+      selectedDate={new Date("2022 3 26")}
       // height={800}
-      // week={{
-      //   weekDays: [0, 1, 2, 3, 4, 5],
-      //   weekStartOn: 6,
-      //   startHour: 7,
-      //   endHour: 22,
-      //   step: 60,
-      //   cellRenderer: () => {
-      //     return <>week</>;
-      //   },
-      // }}
+      week={{
+        weekDays: [0, 1, 2, 3, 4],
+        weekStartOn: 1,
+        startHour: 7,
+        endHour: 22,
+        step: 60
+      }}
       // month={{
       //   weekDays: [0, 1, 2, 3, 4, 5],
       //   weekStartOn: 6,

@@ -26,36 +26,57 @@ const WeekDateBtn = ({
 
   const toggleDialog = () => setOpen(!open);
 
+  const getClosestWeekday = (d: Date) => {
+    if (d.getDay() === 0)
+      return addDays(d, 1);
+    if (d.getDay() === 6)
+      return addDays(d, -1);
+    return d;
+  };
+
   const handleChange = (e: Date | null, k?: string) => {
-    onChange(e || new Date(), "selectedDate");
+    onChange(e || getClosestWeekday(new Date()), "selectedDate");
   };
 
   const handlePrev = () => {
-    const ladtDayPrevWeek = addDays(weekStart, -1);
+    const ladtDayPrevWeek = addDays(weekStart, -3);
     onChange(ladtDayPrevWeek, "selectedDate");
   };
   const handleNext = () => {
     const firstDayNextWeek = addDays(weekEnd, 1);
     onChange(firstDayNextWeek, "selectedDate");
   };
+
+  const disableDate = (d: Date) => {
+    if ([0, 6].includes(d.getDay())) return true;
+    if (d < addDays( new Date(), -7)) return true;
+    if (d > addDays( new Date(), 14)) return true;
+    return false;
+  };
+
   return (
     <div>
-      <LocaleArrow type="prev" onClick={handlePrev} />
+      {weekStart < new Date()? <LocaleArrow type="prev" onClick={handlePrev} disabled={true} /> : <LocaleArrow type="prev" onClick={handlePrev}/>}
       <DateProvider>
         <DatePicker
           open={open}
           onClose={toggleDialog}
           openTo="day"
-          views={["month", "day"]}
+          views={["day"]}
           value={selectedDate}
           onChange={handleChange}
+          disableHighlightToday
+          shouldDisableDate={(d) => disableDate(d)}
           renderInput={(params) => (
             <Button
               ref={params.inputRef}
               style={{ padding: 4 }}
               onClick={toggleDialog}
-            >{`${format(weekStart, "dd", { locale: locale })} - ${format(
-              weekEnd,
+            >{`${weekStart.getMonth() === weekEnd.getMonth() ?
+              format(weekStart, "dd", { locale: locale }) :
+              format(weekStart, "dd MMMM", { locale: locale })
+            } - ${format(
+              addDays(weekEnd,-2),
               "dd MMMM yyyy",
               {
                 locale: locale,
@@ -64,7 +85,7 @@ const WeekDateBtn = ({
           )}
         />
       </DateProvider>
-      <LocaleArrow type="next" onClick={handleNext} />
+      {weekEnd > addDays(new Date(), 14)? <LocaleArrow type="next" onClick={handleNext} disabled={true} /> : <LocaleArrow type="next" onClick={handleNext}/>}
     </div>
   );
 };

@@ -33,6 +33,8 @@ const EditorDatePicker = ({
       <Picker
         value={value}
         label={label}
+        disablePast
+        PopperProps={{placement: 'right'}}
         onChange={(e) => onChange(name, new Date(e || ""))}
         // variant={modalVariant}
         minutesStep={5}

@@ -18,10 +18,10 @@ const Cell = ({
 }: CellProps) => {
   const { triggerDialog, onDrop } = useAppState();
   const theme = useTheme();
-
   return (
     <Button
       fullWidth
+      disabled={start < new Date() ? true : false}
       onClick={() => {
         triggerDialog(true, {
           start,

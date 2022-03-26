@@ -7,8 +7,9 @@ import { MouseEvent } from "react";
 interface LocaleArrowProps {
   type: "prev" | "next";
   onClick?(e?: MouseEvent): void;
+  disabled?: boolean;
 }
-const LocaleArrow = ({ type, onClick }: LocaleArrowProps) => {
+const LocaleArrow = ({ type, onClick, disabled }: LocaleArrowProps) => {
   const { direction } = useAppState();
 
   let Arrow = NavigateNextRoundedIcon;
@@ -30,6 +31,7 @@ const LocaleArrow = ({ type, onClick }: LocaleArrowProps) => {
           onClick();
         }
       }}
+      disabled={disabled}
     >
       <Arrow />
     </IconButton>
