@@ -44,7 +44,7 @@ export const EVENTS = [
     // },
     {
         _id: 7,
-        patient: 'Bruno Cocitto López',
+        patient: { name: 'Bruno Cocitto López', _id: '61a8141f57fa699aba829df8' },
         start: new Date('2022 3 25 09:00'),
         end: new Date('2022 3 25 09:20')
         //color: 'red'
@@ -52,15 +52,17 @@ export const EVENTS = [
     },
     {
         _id: 8,
-        patient: 'Bruno Cocitto López',
+        patient: { name: 'Bruno Cocitto López', _id: '61a8141f57fa699aba829df8' },
         start: new Date('2022 3 24 13:00'),
         end: new Date('2022 3 24 14:00')
     },
     {
         _id: 9,
-        patient: 'Bruno Cocitto López',
+        patient: { name: 'Bruno Cocitto López', _id: '61a8141f57fa699aba829df8' },
         start: new Date('2022 3 28 10:00'),
-        end: new Date('2022 3 28 11:00')
+        end: new Date('2022 3 28 11:00'),
+        notifyPatient: true,
+        notificationsCount: 3
     }
 
     // {

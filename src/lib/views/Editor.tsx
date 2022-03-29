@@ -12,7 +12,7 @@ import {
 import { addMinutes, differenceInMinutes } from 'date-fns';
 import { EditorDatePicker } from '../components/inputs/DatePicker';
 import { EditorInput } from '../components/inputs/Input';
-import { SelectedRange, StateContext } from '../context/state/stateContext';
+import { SelectedRange } from '../context/state/stateContext';
 import { useAppState } from '../hooks/useAppState';
 import {
     EventActions,
@@ -24,6 +24,8 @@ import {
 } from '../types';
 import { EditorSelect } from '../components/inputs/SelectInput';
 import { arraytizeFieldVal } from '../helpers/generals';
+import { EditorNotify } from '../components/inputs/Notify';
+import { EditorAutocomplete } from '../components/inputs/Autocomplete';
 
 export type StateItem = {
     value: any;
@@ -57,20 +59,20 @@ const initialState = (fields: FieldProps[], event?: StateEvent): Record<string, 
         patient: {
             value: event?.patient || '',
             validity: !!event?.patient,
-            type: 'input',
-            config: { label: 'Paciente', required: true, min: 3 }
+            type: 'autocomplete',
+            config: { label: 'Paciente', required: false, min: 3 }
         },
         start: {
             value: event?.start || new Date(),
             validity: true,
             type: 'date',
-            config: { label: 'Inicio', required: true, sm: 6 }
+            config: { label: 'Inicio', required: true, sm: 5 }
         },
         end: {
             value: event?.end || new Date(),
             validity: false,
             type: 'date',
-            config: { label: 'Fin', required: true, sm: 6 }
+            config: { label: 'Fin', required: true, sm: 5 }
         },
         ...customFields
     };
@@ -145,12 +147,26 @@ const Editor = () => {
     };
     const renderInputs = (key: string) => {
         const stateItem = state[key];
-        console.log(stateItem);
-        const keysToDisableWhenPastDate = ['patient', 'start', 'end'];
+        const keysToDisableWhenPastDate = ['patient', 'start', 'end', 'notifyPatient', 'type'];
         switch (stateItem.type) {
             case 'input':
                 return (
                     <EditorInput
+                        value={stateItem.value}
+                        name={key}
+                        onChange={handleEditorState}
+                        touched={touched}
+                        {...stateItem.config}
+                        disabled={
+                            keysToDisableWhenPastDate.includes(key) && state['end'].value < new Date()
+                                ? true
+                                : undefined
+                        }
+                    />
+                );
+            case 'autocomplete':
+                return (
+                    <EditorAutocomplete
                         value={stateItem.value}
                         name={key}
                         onChange={handleEditorState}
@@ -186,6 +202,22 @@ const Editor = () => {
                         options={field?.options || []}
                         onChange={handleEditorState}
                         touched={touched}
+                        {...stateItem.config}
+                        disabled={
+                            keysToDisableWhenPastDate.includes(key) && state['end'].value < new Date()
+                                ? true
+                                : undefined
+                        }
+                    />
+                );
+            case 'notify':
+                return (
+                    <EditorNotify
+                        value={stateItem.value}
+                        name={key}
+                        onChange={handleEditorState}
+                        notifyCount={state['notificationsCount']?.value}
+                        isNew={!selectedEvent}
                         {...stateItem.config}
                         disabled={
                             keysToDisableWhenPastDate.includes(key) && state['end'].value < new Date()

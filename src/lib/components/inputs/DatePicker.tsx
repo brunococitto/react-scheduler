@@ -33,8 +33,10 @@ const EditorDatePicker = ({
         <DateProvider>
             <Picker
                 value={value}
+                views={['day']}
+                showDaysOutsideCurrentMonth
                 label={label}
-                disablePast
+                disablePast={!disabled}
                 ampm={true}
                 PopperProps={{ placement: 'right' }}
                 onChange={e => onChange(name, new Date(e || ''))}

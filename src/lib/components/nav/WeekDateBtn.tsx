@@ -59,7 +59,7 @@ const WeekDateBtn = ({ selectedDate, onChange, weekProps }: WeekDateBtnProps) =>
                     views={['day']}
                     value={selectedDate}
                     onChange={handleChange}
-                    shouldDisableDate={d => !week?.weekDays.some(wd => wd == d.getDay())}
+                    shouldDisableDate={d => !week?.weekDays.some(wd => wd === d.getDay())}
                     minDate={periodStart}
                     maxDate={periodEnd}
                     renderInput={params => (

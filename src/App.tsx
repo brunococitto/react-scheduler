@@ -7,6 +7,43 @@ import es from 'date-fns/locale/es';
 const App = () => {
     const [events, setEvents] = useState(EVENTS);
 
+    const fields = [
+        {
+            name: 'notifyPatient',
+            type: 'notify',
+            config: { label: 'Notificar al paciente', sm: 2 }
+        },
+        {
+            name: 'notificationsCount',
+            type: 'hidden',
+            validity: true
+        },
+        {
+            name: 'type',
+            type: 'select',
+            options: [
+                { id: 1, text: 'Entrevista', value: 'Interview' },
+                { id: 2, text: 'Sesión', value: 'Session' },
+                { id: 3, text: 'Supervisión', value: 'Supervision' }
+            ],
+            config: { label: 'Tipo', required: false, sm: 4 }
+        },
+        {
+            name: 'fees',
+            type: 'input',
+            config: { label: 'Honorarios', required: false, decimal: true, sm: 4 }
+        },
+        {
+            name: 'paymentMethod',
+            type: 'select',
+            options: [
+                { id: 1, text: 'Efectivo', value: 'Cash' },
+                { id: 2, text: 'Transferencia', value: 'Wire transfer' }
+            ],
+            config: { label: 'Forma de pago', required: false, sm: 4 }
+        }
+    ];
+
     return (
         <Scheduler
             dialogMaxWidth="sm"
@@ -25,6 +62,7 @@ const App = () => {
                 endHour: 22,
                 step: 60
             }}
+            fields={fields}
             // month={{
             //   weekDays: [0, 1, 2, 3, 4, 5],
             //   weekStartOn: 6,

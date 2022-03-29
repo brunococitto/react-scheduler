@@ -83,7 +83,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }: EventItemPro
                 variant="subtitle2"
                 style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 2 }}
                 noWrap>
-                {event.patient}
+                {event.patient.name}
             </Typography>
             {showdate && (
                 <Typography style={{ fontSize: 11 }} noWrap>
@@ -112,7 +112,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }: EventItemPro
                     )}
                 </Typography>
                 <Typography variant="subtitle2" align="center" sx={{ fontSize: 12 }} noWrap>
-                    {event.patient}
+                    {event.patient.name}
                 </Typography>
                 <Typography sx={{ fontSize: 11 }} noWrap>
                     {hasNext ? (
@@ -212,7 +212,7 @@ const EventItem = ({ event, multiday, hasPrev, hasNext, showdate }: EventItemPro
                             viewerTitleComponent(event)
                         ) : (
                             <Typography style={{ padding: '5px 0' }} noWrap>
-                                {event.patient}
+                                {event.patient.name}
                             </Typography>
                         )}
                     </div>

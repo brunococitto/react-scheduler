@@ -58,7 +58,7 @@ const EditorInput = ({
             isValid = reg.test(val) && isValid;
             errorMsg = 'Invalid Email';
         }
-        if (decimal) {
+        if (decimal && `${val}`.trim().length > 0) {
             const reg = /^[0-9]+(\.[0-9]*)?$/;
             isValid = reg.test(val) && isValid;
             errorMsg = 'Only Numbers Allowed';
