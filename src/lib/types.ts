@@ -40,8 +40,8 @@ export interface CellRenderedProps {
   onClick(): void;
 }
 interface CalendarEvent {
-  event_id: number | string;
-  title: string;
+  _id: number | string;
+  patient: string;
   start: Date;
   end: Date;
   // description?: string;
